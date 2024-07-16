@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloom's Cube</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat&display=swap">
+  <style>
+    /* Загальні стилі */
+    body {
+      background-color: #e6e6fa; /* Ліловий фон */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Стилі для кубика */
+    .cube {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: rotateX(0deg) rotateY(0deg);
+      transition: transform 1s;
+      cursor: pointer;
+    }
+    .face {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      text-align: center;
+      line-height: 200px;
+      font-size: 24px;
+      color: white;
+      font-weight: bold;
+      border: 1px solid #ccc;
+      background-color: rgba(0, 0, 0, 0.5); /* Півпрозорий чорний фон */
+      display: none; /* Початково ховаємо всі грани */
+    }
+    .face.active {
+      display: block; /* Показуємо активну грань */
+    }
+    .face:nth-child(1) { background-color: #3498db; }
+    .face:nth-child(2) { background-color: #2ecc71; }
+    .face:nth-child(3) { background-color: #e74c3c; }
+    .face:nth-child(4) { background-color: #f39c12; }
+    .face:nth-child(5) { background-color: #9b59b6; }
+    .face:nth-child(6) { background-color: #34495e; }
+  </style>
+</head>
+<body>
+  <div class="cube" id="cube">
+    <div class="face" id="face1">Назви</div>
+    <div class="face" id="face2">Поясни</div>
+    <div class="face" id="face3">Чому</div>
+    <div class="face" id="face4">Придумай</div>
+    <div class="face" id="face5">Поділися</div>
+    <div class="face" id="face6">Запропонуй</div>
+  </div>
+
+  <script>
+    // JavaScript для обертання кубика при кліку і показу граней
+    var cube = document.getElementById('cube');
+    var faces = document.querySelectorAll('.face');
+    var currentFace = 0; // Початкова грань (по порядку)
+
+    cube.addEventListener('click', function() {
+      // Знаходимо наступну грань для показу
+      currentFace = (currentFace + 1) % faces.length;
+
+      // Показуємо тільки активну грань
+      faces.forEach(function(face) {
+        face.classList.remove('active');
+      });
+      faces[currentFace].classList.add('active');
+    });
+  </script>
+</body>
+</html>
